@@ -4,63 +4,72 @@ import TextForms from './components/TextForms';
 import About from './components/About';
 import Alert from './components/Alert';
 
-import React, {useState} from 'react';
-
+import React, { useState } from 'react';
 
 import {
   BrowserRouter as Router,
-  Switch,
+  Routes,
   Route,
   Link
 } from "react-router-dom";
 
 
 
+
 function App() {
   const [mode, setMode] = useState("light");
-  
-    const[alert, setAlert] = useState(null);
-  
-    const showAlert = (type, head, message) => {
-      setAlert({
-        type : type,
-        head : head,
-        body : message
-      })
-  
-      setTimeout(() => {
-        setAlert(null);
-      }, 1000);
-    }
-  
+
+  const [alert, setAlert] = useState(null);
+
+  const showAlert = (type, head, message) => {
+    setAlert({
+      type: type,
+      head: head,
+      body: message
+    })
+
+    setTimeout(() => {
+      setAlert(null);
+    }, 1000);
+  }
+
   const toggleMode = () => {
-    if(mode === "light"){
+    if (mode === "light") {
       setMode("dark");
       document.body.style.backgroundColor = "#212529";
-      
+
       showAlert("success", "Mode Changed", "Dark mode has been enabled")
-      
+
     }
-    else{
+    else {
       setMode("light");
       document.body.style.backgroundColor = "white";
-      
+
       showAlert("success", "Mode Changed", "Light mode has been enabled")
     }
   }
 
   return (
     <>
-      <Navbar title='TextUtils' mode = {mode} toggleMode = {toggleMode}/>
+      <Navbar title='TextUtils' mode={mode} toggleMode={toggleMode} />
+      <Alert alert={alert} />
 
-      <Alert alert = {alert}/>
 
-      <div className="container my-3">
-        <TextForms heading="Text analyser" mode = {mode} alert = {showAlert} />
-      </div>
 
-      <About toggleMode = {toggleMode}/>
+    <div className="container my-3">
+      <Router>
+        <Routes>
+          <Route path='/' element = {<TextForms heading="Text analyser" mode={mode} alert={showAlert} />}/>
+      
+        </Routes>
 
+      </Router> 
+
+
+
+      {/* <About toggleMode={toggleMode} /> */}
+
+    </div>
     </>
   );
 }
