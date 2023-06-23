@@ -1,18 +1,15 @@
 import React, { useState } from 'react'
 
-export default function About() {
+export default function About(props) {
 
     const [myStyle, setMyStyle] = useState({
         color: "black"
     })
 
-    const [btnText, setBtnText] = useState("Dark");
-
 
     const toggleMyStyle = () => {
 
-        if (btnText === "Dark") {
-
+        if (props.mode === "dark") {
             setMyStyle({
                 color: "white",
                 backgroundColor: "black"
@@ -21,13 +18,11 @@ export default function About() {
             setBtnText("Light");
         }
 
-        if(btnText === "Light"){
+        if(props.mode === "light"){
             setMyStyle({
                 color : "black",
                 backgroundColor : "white"
             })
-
-            setBtnText("Dark");
         }
     }
 

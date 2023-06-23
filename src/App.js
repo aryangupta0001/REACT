@@ -9,12 +9,8 @@ import React, { useState } from 'react';
 import {
   BrowserRouter as Router,
   Routes,
-  Route,
-  Link,
-  BrowserRouter
+  Route
 } from "react-router-dom";
-
-
 
 
 function App() {
@@ -51,28 +47,20 @@ function App() {
   }
 
   return (
-    <>
-      <BrowserRouter>
-        <Navbar title='TextUtils' mode={mode} toggleMode={toggleMode} />
-        <Alert alert={alert} />
+    <Router>
+      <Navbar title='TextUtils' mode={mode} toggleMode={toggleMode} />
+      <Alert alert={alert} />
 
+      <div className="container my-3">
+        <Routes>
+          <Route path='/' element={<TextForms heading="Text analyser" mode={mode} alert={showAlert} />} />
+          <Route path='/home' element={<TextForms heading="Text analyser" mode={mode} alert={showAlert} />} />
+          <Route path='/about' element={<About mode={mode} toggleMode={toggleMode} />} />
 
+        </Routes>
 
-        <div className="container my-3">
-          <Routes>
-            <Route path='/' element={<TextForms heading="Text analyser" mode={mode} alert={showAlert} />} />
-            <Route path='/home' element={<TextForms heading="Text analyser" mode={mode} alert={showAlert} />} />
-            <Route path='/about' element={<About toggleMode={toggleMode} />} />
-
-          </Routes>
-
-
-
-
-
-        </div>
-      </BrowserRouter>
-    </>
+      </div>
+    </Router>
   );
 }
 
