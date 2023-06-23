@@ -10,7 +10,8 @@ import {
   BrowserRouter as Router,
   Routes,
   Route,
-  Link
+  Link,
+  BrowserRouter
 } from "react-router-dom";
 
 
@@ -51,25 +52,26 @@ function App() {
 
   return (
     <>
-      <Navbar title='TextUtils' mode={mode} toggleMode={toggleMode} />
-      <Alert alert={alert} />
+      <BrowserRouter>
+        <Navbar title='TextUtils' mode={mode} toggleMode={toggleMode} />
+        <Alert alert={alert} />
 
 
 
-    <div className="container my-3">
-      <Router>
-        <Routes>
-          <Route path='/' element = {<TextForms heading="Text analyser" mode={mode} alert={showAlert} />}/>
-      
-        </Routes>
+        <div className="container my-3">
+          <Routes>
+            <Route path='/' element={<TextForms heading="Text analyser" mode={mode} alert={showAlert} />} />
+            <Route path='/home' element={<TextForms heading="Text analyser" mode={mode} alert={showAlert} />} />
+            <Route path='/about' element={<About toggleMode={toggleMode} />} />
 
-      </Router> 
-
+          </Routes>
 
 
-      {/* <About toggleMode={toggleMode} /> */}
 
-    </div>
+
+
+        </div>
+      </BrowserRouter>
     </>
   );
 }
